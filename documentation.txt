@@ -191,8 +191,15 @@ Without return → Code keeps running, possibly causing another response to be s
 
 Always use return when sending an early response inside conditions.
 
-hello
+=================================================================================================================
 
-bye
+auth.controller.js
+login fn:
 
-see ya
+>> generateToken(user._id,res);
+
+user._id → The MongoDB _id of the authenticated user.
+res → The Express response object, which allows setting cookies or sending responses.
+This function ensures that once a user logs in, they receive a secure token for authentication in future requests.
+
+
