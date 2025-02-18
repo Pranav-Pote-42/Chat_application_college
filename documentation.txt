@@ -309,3 +309,6 @@ what are mongoose , mongoose.Schema and mongoose.Model ?
 Think of it like a blueprint that tells MongoDB what kind of data a collection should store.
 
 ✅ A model (mongoose.model) is a wrapper around the schema that allows interacting with the database.(fro CRUD ops)
+
+
+last_update by pote
