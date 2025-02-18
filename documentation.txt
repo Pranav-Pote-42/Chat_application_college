@@ -1,6 +1,12 @@
-yt source for refernce:
+initialise with the README.md and follow the steps
 
-As a programmer : https://youtu.be/ntKkVrQqBYY
+
+This document has been created for the better understanding of the technologies used 
+and to understand problems encountered during the development of this project .
+
+Credits and special thanks to :
+
+
 
 frontend:
 
