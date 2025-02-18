@@ -305,7 +305,10 @@ what are mongoose , mongoose.Schema and mongoose.Model ?
 
 ✅ mongoose is the main library that connects your Node.js app to MongoDB and provides utilities to work with data.
 
-✅ A schema (create TABLE) (mongoose.Schema) defines the structure of a MongoDB document.
+✅ A schema (create TABLE) (mongoose.Schema) defines the structure of a MongoDB document.dd
 Think of it like a blueprint that tells MongoDB what kind of data a collection should store.
 
 ✅ A model (mongoose.model) is a wrapper around the schema that allows interacting with the database.(fro CRUD ops)
+
+
+hello my name is venh
