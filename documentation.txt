@@ -55,7 +55,7 @@ It gets listed under "devDependencies" in package.json.
 
 ============================================================================
 
-index .js will have the middle ware so al, the requests for api/auth/...
+index .js will have the middleware so al, the requests for api/auth/...
 redirected to authRoutes function
 
 authRoutes function imported from the routes folder from aut.route.js file
@@ -316,5 +316,3 @@ Think of it like a blueprint that tells MongoDB what kind of data a collection s
 
 ✅ A model (mongoose.model) is a wrapper around the schema that allows interacting with the database.(fro CRUD ops)
 
-
-last_update by pote
