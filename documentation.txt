@@ -316,3 +316,60 @@ Think of it like a blueprint that tells MongoDB what kind of data a collection s
 
 ✅ A model (mongoose.model) is a wrapper around the schema that allows interacting with the database.(fro CRUD ops)
 
+===============================================================================
+
+message.controller.js
+
+filteredResults = User.find({_id:{$ne:loggedInUsers}}).select("-password")
+
+mongo takes object like queries, as is this case here inside find() method
+and then another nested {$ne} object as we want to apply another condition for 
+the _id
+
+Model.find(query).select(fields)
+User.find().select("name email")
+Returns only name and email, excluding all other fields (except _id, which is included by default).
+
+✅ MongoDB's find() and select() are NOT JavaScript built-in methods.
+✅ They are MongoDB (Mongoose) methods used to query the database in JavaScript.
+
+====================================================================
+ERROR 2:
+
+didnt use await :
+
+Error in getUsersforSidebar: Converting circular structure to JSON
+    --> starting at object with constructor 'MongoClient'
+    |     property 's' -> object with constructor 'Object'
+    |     property 'sessionPool' -> object with constructor 'ServerSessionPool'
+    --- property 'client' closes the circle
+
+=======================================================
+
+req.body comes from the frontend (React, Postman, mobile apps, etc.) and is sent via a POST request.using Axios or fetch
+
+======================================================
+
+After a successful upload, uploaderResponse will be an object with details like:
+
+{
+    "asset_id": "abc123",
+    "public_id": "myimage123",
+    "version": 1678456789,
+    "format": "jpg",
+    "resource_type": "image",
+    "secure_url": "https://res.cloudinary.com/demo/image/upload/v1678456789/myimage123.jpg"
+}
+=============================================================
+const newMessage = new Message({
+    senderId ,
+    receiverId,
+    text,
+    image : imageUrl,
+});
+
+newMessage is just an instance of the model and makes a new document (SQL : row)
+and then saved inside the model.
+
+✔️ The field names must match those defined in the schema (senderId, receiverId, text, image).
+❌ The order of fields inside new Message({...}) does not matter.
