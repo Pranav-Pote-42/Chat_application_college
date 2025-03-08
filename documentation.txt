@@ -162,6 +162,8 @@ The user's browser automatically sends this cookie only when making requests to 
 When the user visits again, the browser automatically sends the JWT cookie in the request.
 The server verifies the token and authenticates the user.
 
+
+
 =============================================================================
 ERROR 1:
 
@@ -190,10 +192,3 @@ With return → Execution stops after sending a response, preventing errors. ✅
 Without return → Code keeps running, possibly causing another response to be sent (which is not allowed). ❌
 
 Always use return when sending an early response inside conditions.
-
-hello
-
-bye
-
-see ya
-bjfhfhgjhjkj
