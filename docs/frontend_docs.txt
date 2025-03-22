@@ -1,0 +1,41 @@
+What is Routes and Route in React?
+React Router is a library used for handling navigation in React applications. It enables single-page applications (SPAs) to have different views without requiring a full-page reload.
+
+Routes: It is a wrapper that contains multiple Route components. It tells React Router that we are defining multiple routes inside it.
+Route: It defines a specific path (path='') and what component (element={<Component />}) should be rendered when the user visits that path.
+
+=======================================================================
+
+✔ BrowserRouter is required to enable routing in React.
+✔ It tracks the URL and renders the correct component.
+✔ Always wrap your <App /> component with <BrowserRouter> in index.js.
+✔ Use <Routes> and <Route> inside BrowserRouter to define different paths.
+
+Why is BrowserRouter Necessary?
+Enables Single-Page Application (SPA) Routing
+
+React doesn’t reload the page when switching routes. It updates only the necessary part of the UI.
+Keeps URL in Sync with UI
+
+React Router updates the browser’s address bar (/home, /about, etc.) while displaying the correct component.
+Handles History and Navigation
+
+It allows users to go back and forward using the browser’s navigation buttons.
+
+======================================================================
+
+in axios.js
+
+we create a custom axios called "axiosInstance" the benefit is that now we export this function 
+and when we use 
+
+axiosInstance.get("short-url");
+
+instead of the long URL "http://localhost:5001/api/auth/check"
+
+=======================================================================
+
+2 ways to set states :
+    set((state)=>({...state, authUser:res.data}))
+    set({authUser:null})
+

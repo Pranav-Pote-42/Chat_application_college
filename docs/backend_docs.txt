@@ -482,3 +482,23 @@ both backend and frontend routes are independent of each other
 BrowseRouter defines the routes that the user sees like "/",
 "/about", "/home" etc...
 
+=============================================================================
+app.use(cors({
+    origin:"http://localhost:5173",
+    credentials:true,
+}))
+
+-------------------------------------------------------------
+    This tells Express to use the cors middleware to handle cross-origin requests.
+
+    origin: "http://localhost:5173"
+
+    This allows only requests from http://localhost:5173 (your frontend, which is likely running with Vite).
+
+    It restricts other origins from making requests to your backend.
+
+    credentials: true
+
+    This allows requests to include credentials (like cookies, authentication tokens, and sessions).
+
+    Required if your backend needs to handle authentication (e.g., session-based authentication with cookies).
