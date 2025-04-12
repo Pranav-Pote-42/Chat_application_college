@@ -7,6 +7,7 @@ export const signup=async (req,res)=>{
     
     const {email,fullName,password}=req.body;
 
+
     try{
 
         if(!fullName || !email || !password){
@@ -49,7 +50,6 @@ export const signup=async (req,res)=>{
 
 };
 
-
 export const login=async (req,res)=>{
 
     const {email,password}=req.body;
@@ -81,7 +81,6 @@ export const login=async (req,res)=>{
         return res.status(500).json({message:"Internal server error !"})
     }
 };
-
 
 export const logout=(req,res)=>{
     try {

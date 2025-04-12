@@ -39,3 +39,38 @@ instead of the long URL "http://localhost:5001/api/auth/check"
     set((state)=>({...state, authUser:res.data}))
     set({authUser:null})
 
+=======================================================================
+
+In ProfilePage.jsx component
+
+const handleImageUpload = async (e) => {
+  const file = e.target.files[0];           // Get the first selected file
+  if (!file) return;                        // If no file is selected, do nothing
+
+  const reader = new FileReader();          // Create a FileReader instance
+  reader.readAsDataURL(file);               // Convert the file to a Base64-encoded string
+
+  reader.onload = async () => {             // When reading is complete
+    const base64Image = reader.result;       // Get the Base64 string
+    await updateProfile({ profilePic: base64Image });  // Update the profile with the image
+  };
+};
+
+----------------------------------------------------------------------------
+The FileReader API is a built-in JavaScript object that allows web applications to read file contents asynchronously. It's mainly used for processing files selected by the user (like images, PDFs, or text files).
+
+The readAsDataURL() method converts the file into a Base64-encoded string (which is a long text representation of the file).
+This is useful when uploading images because Base64 can be stored in a database or sent in an API request.
+once the file is successfully read, reader.result holds the Base64 string
+
+When calling:
+reader.readAsDataURL(file);
+
+the file does not get read immediately. Instead, the browser reads the file asynchronously (in the background), and when it's done, it triggers the onload event.
+
+.onload is a property like onChange, onClick that stores a function.
+🔹 It gets triggered automatically when the file reading is done.
+🔹 You cannot call it manually like a method().
+
+Thus, we define reader.onload to specify what should happen when the reading is complete.
+
