@@ -34,3 +34,12 @@
 - **E-commerce**: Deliver high-quality product images quickly  
 - **Social Media Platforms**: Enhance user experience with dynamic image manipulation  
 - **Streaming Services**: Optimize and stream videos efficiently  
+
+
+
+
+# Lucide React
+
+- Lucide React is a modern and customizable icon library for React applications. It provides a collection of clean and consistent SVG icons that are easy to use and modify.
+
+- npm install lucide-react
