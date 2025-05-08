@@ -68,11 +68,14 @@ export const login=async (req,res)=>{
 
         generateToken(user._id,res);
 
+        console.log(user)
+
         res.status(200).json({
             _id:user.id,
             fullName:user.fullName,
             email:user.email,
             profilePic:user.profilePic,
+            createdAt: user.createdAt,
 
         })
 
