@@ -1,18 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useChatStore } from '../store/useChatStore'
 import SideSkeleton from "./skeletons/SidebarSkeleton.jsx"
-import { Users } from 'lucide-react'
+import { Search, Users } from 'lucide-react'
 import { useAuthStore } from '../store/useAuthStore.js'
 
 const Sidebar = () => {
 
     const {getUsers, users, selectedUser, setSelectedUser, isUsersLoading } = useChatStore()
     const {onlineUsers} = useAuthStore()
+    
+    const[showOnlineOnly, setShowOnlineOnly] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(()=>{
         getUsers();
     }, [getUsers])
 
+    const filteredUsers = users.filter((user)=>{
+        const isOnline = !showOnlineOnly || onlineUsers.includes(user._id);
+        const isSearch = !searchQuery || user.fullName.toLowerCase().includes(searchQuery.toLowerCase());
+        
+        return isOnline && isSearch;
+    })
     if(isUsersLoading) return <SideSkeleton />
 
   return (
@@ -22,10 +31,41 @@ const Sidebar = () => {
                 <Users className="size-6" />
                 <span className="font-medium hidden lg:block">Contacts</span>
             </div>
+
+            {/* search bar */}
+
+                <div className="mt-3 hidden lg:flex items-center gap-2">
+                    <div className="relative w-full">
+                        <Search className="absolute top-2.5 left-2 size-4 text-zinc-400" />
+                        <input
+                            type = "text"
+                            placeholder = "seacrh here ..."
+                            value = {searchQuery}
+                            onChange = {(e)=>setSearchQuery(e.target.value)}
+                            className="input input-sm input-bordered w-full pl-8 text-sm"
+                        />
+                    </div>
+                </div>
+
+            {/* online users toggle */}
+
+            <div className="mt-3 hidden lg:flex items-center gap-2">
+                <label className="cursor-pointer flex items-center gap-2">
+                    <input
+                    type="checkbox"
+                    checked={showOnlineOnly}
+                    onChange={(e) => setShowOnlineOnly(e.target.checked)}
+                    className="checkbox checkbox-sm"
+                    />
+                    <span className="text-sm">Show online only</span>
+                </label>
+                <span className="text-xs text-zinc-500">({onlineUsers.length - 1} online)</span>
+            </div>
+
         </div>
 
         <div className="overflow-y-auto w-full py-3">
-        {users.map((user) => (
+        {filteredUsers.map((user) => (
             <button
             key={user._id}
             onClick={() => setSelectedUser(user)}
@@ -58,6 +98,10 @@ const Sidebar = () => {
             </div>
             </button>
         ))}
+
+        {filteredUsers.length === 0 && (
+            <div className='text-center text-zinc-500 py-4'>No online users</div>
+        )}
         </div>
 
     </aside>

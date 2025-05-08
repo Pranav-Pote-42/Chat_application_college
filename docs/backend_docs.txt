@@ -502,3 +502,65 @@ app.use(cors({
     This allows requests to include credentials (like cookies, authentication tokens, and sessions).
 
     Required if your backend needs to handle authentication (e.g., session-based authentication with cookies).
+
+================================================================================
+web Sockets
+
+const server = http.createServer(app);
+
+Express by itself doesn’t support raw WebSocket connections — you need the HTTP server underneath.
+
+const io = new Server(server, {
+    cors: { origin: ["http://localhost:5173"] }
+});
+--------------------------------------------------------------------------------
+You create a Socket.IO server and attach it to the HTTP server.
+You configure it to allow CORS (Cross-Origin Requests) from your frontend running on localhost:5173 (e.g., Vite dev server).
+
+We’re not making two servers — we’re just creating:
+An HTTP server (http.createServer(app)) to handle traditional requests (like your Express routes),
+Then attaching a Socket.IO server on top of that same HTTP server to handle WebSocket connections.
+They share the same server. It's like adding a new layer (real-time) on top of the existing one.
+Because app.listen() is just a shortcut for:
+
+const server = http.createServer(app);
+server.listen(PORT);
+
+But Socket.IO needs access to the raw HTTP server so it can hijack the upgrade requests and establish WebSocket connections.
+
+✅ const app = express()
+This initializes your Express app — it handles:
+HTTP routes like GET /users, POST /login, etc.
+Middleware (e.g., for parsing JSON, cookies, auth)
+Static file serving if needed
+
+✅ const server = http.createServer(app)
+This takes your Express app and wraps it in a raw HTTP server.
+Why? Because Socket.IO needs access to the raw HTTP server underneath to attach itself and handle WebSocket upgrades.
+
+const app is not a full web server , its just a request handler for middlewares and requests 
+and processes against the given logics 
+while const server is fully a web server has various networking stuff like TcP stuff and wraps around the app, so now it can network + handle requests , as sockets need to hook into the network stuff we need the httpServer.
+
+express / app	         API routes, middleware, static files
+http.createServer(app)	 Creates a raw HTTP server to run everything
+new Server(server)	     Enables Socket.IO (WebSocket) support on the same HTTP server
+
+socket.handshake
+handshake is like the metadata envelope that wraps around the socket connection when it first connects.
+contains the ip, queries passed from the frontend
+
+io.emit(eventName, data);
+
+eventName – a custom string to name your event (e.g. "message", "userOnline", etc.)
+data – any data you want to send to clients (object, string, array, etc.)
+
+socket.on(event, callback) →
+✅ Registers a listener for an event.
+✅ Keeps listening every time that event happens.
+
+socket.off(event, callback) →
+❌ Removes the listener for that event.
+❌ Stops reacting to that event.
+
+If you don't call .off(), the socket will keep stacking up listeners — causing duplicate responses, memory leaks, and unwanted bugs.

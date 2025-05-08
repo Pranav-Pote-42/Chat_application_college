@@ -1,5 +1,20 @@
 {
   "dependencies": {
     "cors": "^2.8.5"
-  }
+  },
+  "name": "chat_application_college",
+  "version": "1.0.0",
+  "description": "A real-time chat application built using modern web technologies. This app allows users to send and receive messages instantly, providing a seamless communication experience.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "build":"npm install --prefix backend && install --prefix frontend && npm run build --prefix frontend ",
+    "start":"npm run start --prefix backemd"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

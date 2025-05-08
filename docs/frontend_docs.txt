@@ -72,5 +72,39 @@ the file does not get read immediately. Instead, the browser reads the file asyn
 🔹 It gets triggered automatically when the file reading is done.
 🔹 You cannot call it manually like a method().
 
+Event	              Fires when...	                         Useful for
+onload	            File read successfully	               Handling read result
+onloadend	          File read is done (success or error)	 Cleanup, final actions
+
 Thus, we define reader.onload to specify what should happen when the reading is complete.
 
+=========================================================================================================
+
+ Why use get() inside a Zustand store?
+    Even within the same store, if you're trying to access the state inside another function, you need to use get() because:
+
+    The store setup is just a function.
+
+    set, get, and sometimes api are passed into that function by Zustand when it initializes the store.
+
+    get() gives you the latest snapshot of the state.
+================================================================================
+
+ERROR:
+
+Problem                                      | Fix
+You imported backend socket.js into frontend | Only use socket.io-client on frontend
+Buffer not available in browser              | Caused by backend-only                                   packages or code running in frontend
+io in server and io in client are 
+different things                             | Use socket.io on server and socket.                                        io-client on frontend
+
+🎯 Why subscribeToMessages is necessary:
+Otherwise, you won't see your friend's new messages live.
+
+Without it, you'd have to keep refreshing manually (by calling getMessages again) — which sucks.
+
+Your thinking is right — on a surface level it looks like both are updating messages.
+But the key difference is:
+
+getMessages / sendMessage = Request-Response (HTTP) 
+subscribeToMessages = Real-Time Push (WebSocket)
