@@ -39,7 +39,7 @@ const Sidebar = () => {
                         <Search className="absolute top-2.5 left-2 size-4 text-zinc-400" />
                         <input
                             type = "text"
-                            placeholder = "seacrh here ..."
+                            placeholder = "search here..."
                             value = {searchQuery}
                             onChange = {(e)=>setSearchQuery(e.target.value)}
                             className="input input-sm input-bordered w-full pl-8 text-sm"
